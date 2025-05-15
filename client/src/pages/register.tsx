@@ -223,19 +223,10 @@ export default function Register() {
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-slate-800"></div>
                 </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-slate-900 px-2 text-slate-500">Or continue with</span>
-                </div>
+              
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
-                <Button variant="outline" className="bg-slate-800 border-slate-700 text-white hover:bg-slate-700">
-                  GitHub
-                </Button>
-                <Button variant="outline" className="bg-slate-800 border-slate-700 text-white hover:bg-slate-700">
-                  Google
-                </Button>
-              </div>
+          
             </CardContent>
           </Card>
         </motion.div>
