@@ -186,7 +186,6 @@ export default function LandingPage() {
         <div className="container mx-auto flex items-center justify-between p-4">
           <div className="flex items-center">
             <span className="text-primary text-xl font-bold">Prismon</span>
-            <span className="text-white text-xl font-medium">Dashboard</span>
           </div>
           <div className="hidden md:flex space-x-8">
             <a href="#features" className="text-slate-300 hover:text-white transition-colors">Features</a>
