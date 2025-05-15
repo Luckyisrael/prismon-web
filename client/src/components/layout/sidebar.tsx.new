@@ -1,0 +1,74 @@
+import { cn } from "@/lib/utils";
+import { Link } from "wouter";
+import { useLocation } from "wouter";
+import { 
+  LayoutGrid, 
+  BarChart, 
+  Coins, 
+  Settings, 
+  LogOut 
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { useAuth } from "@/context/auth-context";
+
+interface SidebarProps {
+  className?: string;
+}
+
+export function Sidebar({ className }: SidebarProps) {
+  const { logout } = useAuth();
+  const [location] = useLocation();
+
+  const links = [
+    { href: "/dashboard", label: "Dashboard", icon: LayoutGrid },
+    { href: "/dashboard/analytics", label: "Analytics", icon: BarChart },
+    { href: "/dashboard/solana", label: "Solana Tools", icon: Coins },
+    { href: "/dashboard/settings", label: "Settings", icon: Settings }
+  ];
+
+  return (
+    <aside className={cn("w-64 bg-slate-900 border-r border-slate-800 h-full flex flex-col", className)}>
+      <div className="p-5 border-b border-slate-800">
+        <div className="flex items-center">
+          <span className="text-primary text-xl font-bold">Prismon</span>
+          <span className="text-white text-xl font-medium">Dashboard</span>
+        </div>
+      </div>
+      
+      <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
+        {links.map((link) => {
+          const isActive = location === link.href;
+          const Icon = link.icon;
+          
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={cn(
+                "flex items-center px-3 py-2 text-sm font-medium rounded-md",
+                isActive
+                  ? "bg-primary/20 text-white"
+                  : "text-slate-300 hover:bg-slate-800 hover:text-white"
+              )}
+            >
+              <Icon className={cn("mr-3 h-5 w-5", isActive ? "text-primary" : "text-slate-400")} />
+              {link.label}
+            </Link>
+          );
+        })}
+      </nav>
+      
+      <div className="p-4 border-t border-slate-800">
+        <Button
+          variant="ghost"
+          className="w-full justify-start text-slate-300 hover:bg-slate-800 hover:text-white"
+          onClick={() => logout()}
+        >
+          <LogOut className="mr-3 h-5 w-5 text-slate-400" />
+          Logout
+        </Button>
+      </div>
+    </aside>
+  );
+}
