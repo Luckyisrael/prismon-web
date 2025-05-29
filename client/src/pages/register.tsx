@@ -36,7 +36,7 @@ export default function Register() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const response = await register(values.email, values.password);
+      const response = await register(values.email, values.password, values.confirmPassword);
       
       if (response.succeeded) {
         toast({

@@ -8,7 +8,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   user: { id: string; email: string } | null;
   login: (email: string, password: string) => Promise<AuthResponse>;
-  register: (email: string, password: string) => Promise<AuthResponse>;
+  register: (email: string, password: string, confirmPassword: string) => Promise<AuthResponse>;
   logout: () => void;
   isLoading: boolean;
   isOnboardingComplete: boolean;
@@ -109,10 +109,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const handleRegister = async (email: string, password: string) => {
+  const handleRegister = async (email: string, password: string, confirmPassword: string) => {
     setIsLoading(true);
     try {
-      const response = await register(email, password);
+      const response = await register(email, password, confirmPassword);
       setIsLoading(false);
       
       if (response.succeeded && response.token) {
@@ -172,7 +172,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isAuthenticated,
         user,
         login: handleLogin as (email: string, password: string) => Promise<AuthResponse>,
-        register: handleRegister as (email: string, password: string) => Promise<AuthResponse>,
+        register: handleRegister as (email: string, password: string, confirmPassword: string) => Promise<AuthResponse>,
         logout: handleLogout,
         isLoading,
         isOnboardingComplete,

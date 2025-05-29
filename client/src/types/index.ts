@@ -34,6 +34,7 @@ export interface Analytics {
 export interface AuthData {
   email: string;
   password: string;
+  confirmPassword: string;
 }
 
 export interface AuthResponse {

@@ -28,12 +28,13 @@ export async function login(
 export async function register(
   email: string,
   password: string,
+  confirmPassword: string,
 ): Promise<AuthResponse> {
   try {
     const response = await apiRequest(
       "POST",
       `${API_BASE_URL}/auth/register`,
-      { email, password },
+      { email, password, confirmPassword },
     );
     const data = await response.json();
     
@@ -69,8 +70,8 @@ export function useLogin() {
 // Hook for registration with React Query
 export function useRegister() {
   return useMutation({
-    mutationFn: async ({ email, password }: AuthData) => {
-      return await register(email, password);
+    mutationFn: async ({ email, password, confirmPassword }: AuthData) => {
+      return await register(email, password, confirmPassword);
     },
     onSuccess: (data) => {
       // Invalidate relevant queries after successful registration
